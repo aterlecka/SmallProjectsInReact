@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
 
-export default App;
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+    render() {
+        const {timeZone, city = 'Another city'} = this.props;
+        return (
+            <div>
+                <h1>{`Time in ${city}`}</h1>
+                <h2>It is {this.state.date.toLocaleTimeString('en-GB', {timeZone})}</h2>
+            </div>
+        );
+    }
+}
+export default Clock;

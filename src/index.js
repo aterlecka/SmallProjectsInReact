@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Clock from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(
+    <div>
+        <Clock timeZone="Europe/Warsaw" city="Warsaw"/>
+        <Clock timeZone="America/New_York" city="New York"/>
+        <Clock timeZone="Europe/London" city="London"/>
+    </div>,
+    document.getElementById('root')
+);
 serviceWorker.unregister();
+
+
